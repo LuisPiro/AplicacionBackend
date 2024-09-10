@@ -8,7 +8,7 @@ const swaggerOptions = {
       },
       servers: [
         {
-          url: 'http://localhost:5000/users/register',
+          url: 'http://localhost:5000/',
           description: 'Servidor de desarrollo',
         },
       ],
