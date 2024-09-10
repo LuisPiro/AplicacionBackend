@@ -1,15 +1,11 @@
 const express = require('express');
-const { createProduct, getProducts, updateProduct, deleteProduct } = require('../controllers/productController');
+const router = express.Router();
+const productController = require('../controllers/productController');
 const { protect } = require('../middleware/authMiddleware');
 
-const router = express.Router();
+router.post('/', protect, productController.createProduct);
+router.get('/', protect, productController.getAllProducts);
 
-router.route('/')
-  .post(protect, createProduct)
-  .get(protect, getProducts);
-
-router.route('/:id')
-  .put(protect, updateProduct)
-  .delete(protect, deleteProduct);
+// Otras rutas para actualizar y eliminar productos...
 
 module.exports = router;

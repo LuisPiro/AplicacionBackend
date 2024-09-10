@@ -1,24 +1,24 @@
 const Product = require('../models/productModel');
 
-// Crear producto
 exports.createProduct = async (req, res) => {
-  const { name, description, price } = req.body;
+  const { name, price, description } = req.body;
+  const user = req.user._id;
 
-  const product = new Product({
-    name,
-    description,
-    price,
-    user: req.user._id,
-  });
-
-  const createdProduct = await product.save();
-  res.status(201).json(createdProduct);
+  try {
+    const product = await Product.create({ name, price, description, user });
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating product', error });
+  }
 };
 
-// Obtener productos
-exports.getProducts = async (req, res) => {
-  const products = await Product.find({ user: req.user._id });
-  res.json(products);
+exports.getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find({ user: req.user._id });
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching products', error });
+  }
 };
 
 // Actualizar producto
