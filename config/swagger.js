@@ -1,20 +1,21 @@
+const swaggerJsDoc = require('swagger-jsdoc');
+
 const swaggerOptions = {
-    definition: {
-      openapi: '3.0.0',
-      info: {
-        title: 'API de Autenticación y Productos',
-        version: '1.0.0',
-        description: 'API para manejar usuarios y productos con autenticación usando JWT',
-      },
-      servers: [
-        {
-          url: 'http://localhost:5000/',
-          description: 'Servidor de desarrollo',
-        },
-      ],
+  swaggerDefinition: {
+    openapi: '3.0.0', // o '2.0' para Swagger 2.0
+    info: {
+      title: 'Gestion de usuarios y productos',
+      description: 'Documentacion de la base de datos',
+      version: '1.0.0',
     },
-    apis: ['./routes/userRoutes.js'], // Aquí se incluyen las rutas donde tienes tus endpoints
-  };
-  
-  module.exports = swaggerOptions;
-  
+    servers: [
+      {
+        url: 'http://localhost:5000', // URL del servidor de desarrollo
+        description: 'Servidor de Desarrollo',
+      },
+    ],
+  },
+  apis: ['./routes/userRoutes.js', './routes/productRoutes.js'], // Incluye ambas rutas
+};
+
+module.exports = swaggerOptions;
